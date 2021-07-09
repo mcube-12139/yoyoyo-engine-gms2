@@ -1,0 +1,2 @@
+signText = "";
+showText = false;

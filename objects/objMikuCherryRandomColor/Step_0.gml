@@ -1,0 +1,1 @@
+direction += curve;

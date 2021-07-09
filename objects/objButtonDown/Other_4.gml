@@ -1,0 +1,1 @@
+global.trigger[trg] = false;
