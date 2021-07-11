@@ -3,9 +3,9 @@ An "I Wanna" engine for GameMaker Studio 2.3.x.
 ## Latest Stable Version
 null
 ## Latest Version
-1.0.0
+1.0.1
 ## Version 1.0.0
-**This version may be unstable**  
+**This version is not available**  
 Original version.  
 Almost a full replica of the YoYoYo Engine for GameMaker: Studio.
 ### Traits
@@ -77,8 +77,8 @@ Almost a full replica of the YoYoYo Engine for GameMaker: Studio.
     | `scrPlayer` | `player_shoot` | `scrPlayerShoot` |
     | `scrPlayer` | `player_die` | `scrKillPlayer` |
     | `scrPlayer` | `player_flip` | `scrFlipGrav` |
-    | `scrInitializing` | Executed Immediately | `scrInitializeGlobals` |
-    | `scrInitializing` | Executed Immediately | `scrSetGlobalOptions` |
+    | `scrInitializing`**(changed into `scrGame` in new versions)** | Executed Immediately **(changed into `game_init` in new versions)** | `scrInitializeGlobals` |
+    | `scrInitializing`**(changed into `scrGame` in new versions)** | Executed Immediately **(changed into `game_init` in new versions)** | `scrSetGlobalOptions` |
     | `scrGame` | `game_save_config` | `scrSaveConfig` |
     | `scrGame` | `game_load_config` | `scrLoadConfig` |
     | `scrGame` | `game_saves` | `scrSaveGame` |
@@ -100,7 +100,7 @@ Almost a full replica of the YoYoYo Engine for GameMaker: Studio.
     | `scrOther` | `draw_text_outline` | `scrDrawTextOutline` |
     | `scrOther` | `make_shapes` | `scrMakeShapes` |
     | `scrOther` | `make_circle` | `scrMakeCircle` |
-* Add enumeration: `MenuMode`, `DeathMusicMode`, `Difficulty`, and `CameraMode`, representing menu mode, death music mode, difficulty mode, and camera mode. They are in script `scrInitializing`.
+* Add enumeration: `MenuMode`, `DeathMusicMode`, `Difficulty`, and `CameraMode`, representing menu mode, death music mode, difficulty mode, and camera mode. They are in script `scrInitializing`.**(Enumeration `Difficulty` is replaced by macros in new versions.)**
 * Modify function: `scrPlayerJump`, because platforms are no longer blocks. Now it checks collision with blocks and platforms to decide whether single jump is enabled.
 * The parameters of function `scrPlayerShoot` were modified, because the wall jumping process changed. Now its parameter `mirror` indicates whether to shoot to the opposite direction.
 * The body of function `scrFlipGrav` was modified. Now it no longer performs `scrSetPlayerMask`, and the flip adjustment value of `y` changes from `4` to `3`, and it flips `image_yscale` value.
@@ -160,3 +160,24 @@ Almost a full replica of the YoYoYo Engine for GameMaker: Studio.
 * Add tile set: `tsAllTiles`, representing all block tiles. Autotiling is switched on.
 * Without affecting semantics, the form of some code is modified. For example, `array_copy` is used to replace loop statements to copy arrays, and `?:` operator is used to replace short `if..else` statements for selection.
 * Other unimportant changes.
+## Version 1.0.1
+**This version may be unstable**  
+Fixed some bugs.
+### Traits
+* Fixed the bug of unable to set infinitely jumping and debug infinitely jumping.
+* Fixed the bug that the difficulty of warp difficulty selecting cannot work normally.
+* Fixed the bug that the game cannot returns to title screen properly.
+* Fixed the bug that Kid will get stuck in blocks when it's against them and turns back.
+* Fixed the bug that bullets are not destroyed when touching platforms.
+* Bow delaying is realized.
+### Change List
+* Modify script: `scrPlayer`.
+    * In function `player_jump`, infinitely jumping and debug infinitely jumping checking codes are added.
+    * Add function `player_mirror` to realize Kid turning back.
+* Modify script: `scrInitializing`. Macros `MEDIUM`, `HARD`, `VERY_HARD`, and `IMPOSSIBLE` are used to replace enumeration `Difficulty`. And corresponding modifications are made at all places it's used: `objSave*`, `objPlayer`, `objWarpStart`'s instances, `objWarpAutosaveNext`, and `objDifficultyMenu`.
+* Modify script: `scrInitializing`, `scrGame`. The immediately executed code in the former is moved to function `game_init` in the latter.
+* Modify object: `objWorld`. Add code to the Game Start Event to execute function `game_init`.
+* Modify object: `objPlayer`.
+    * Add code to the Draw Event to realize bow delaying.
+    * Modify code in Step Event. Use function `player_mirror` instead of assigning to `image_xscale` directly to realize it turning back.
+* Modify object: `objBullet`. Add Collision Event with `objPlatform` and action to destroy itself.

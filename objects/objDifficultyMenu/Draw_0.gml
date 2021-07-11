@@ -13,11 +13,11 @@ for (var i = 0; i != 3; ++i) {
         if (!warnText) {
             if (select_2 == -1) {
                 difStr = "< Load Game >";
-            } else if (select_2 == Difficulty.MEDIUM) {
+            } else if (select_2 == MEDIUM) {
                 difStr = "< Medium >";
-            } else if (select_2 == Difficulty.HARD) {
+            } else if (select_2 == HARD) {
                 difStr = "< Hard >";
-            } else if (select_2 == Difficulty.VERY_HARD) {
+            } else if (select_2 == VERY_HARD) {
                 difStr = "< Very Hard >";
             } else {
                 difStr = "< Impossible >";
@@ -40,11 +40,11 @@ for (var i = 0; i != 3; ++i) {
         draw_set_halign(fa_center);
         
         if (!difSelect || (difSelect && i != select)) {
-            if (difficulty[i] == Difficulty.MEDIUM) {
+            if (difficulty[i] == MEDIUM) {
                 difStr = "Medium";
-            } else if (difficulty[i] == Difficulty.HARD) {
+            } else if (difficulty[i] == HARD) {
                 difStr = "Hard";
-            } else if (difficulty[i] == Difficulty.VERY_HARD) {
+            } else if (difficulty[i] == VERY_HARD) {
                 difStr = "Very Hard";
             } else {
                 difStr = "Impossible";

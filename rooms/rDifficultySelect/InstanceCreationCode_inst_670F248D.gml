@@ -1,2 +1,2 @@
-dif = Difficulty.MEDIUM;
+dif = MEDIUM;
 difName = "Medium";

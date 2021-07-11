@@ -3,9 +3,9 @@
 ## 最新稳定版本
 无
 ## 最新版本
-1.0.0
+1.0.1
 ## 版本1.0.0
-**此版本可能不稳定**  
+**此版本不是可用的**  
 最初版本。  
 几乎是用于GameMaker: Studio的那个YoYoYo引擎的完全复制品。
 ### 版本特性
@@ -78,8 +78,8 @@
     | `scrPlayer` | `player_shoot` | `scrPlayerShoot` |
     | `scrPlayer` | `player_die` | `scrKillPlayer` |
     | `scrPlayer` | `player_flip` | `scrFlipGrav` |
-    | `scrInitializing` | 立即执行 | `scrInitializeGlobals` |
-    | `scrInitializing` | 立即执行 | `scrSetGlobalOptions` |
+    | `scrInitializing`**（在新版本中被改为`scrGame`）** | 立即执行 **（在新版本中被改为`game_init`）** | `scrInitializeGlobals` |
+    | `scrInitializing`**（在新版本中被改为`scrGame`）** | 立即执行 **（在新版本中被改为`game_init`）** | `scrSetGlobalOptions` |
     | `scrGame` | `game_save_config` | `scrSaveConfig` |
     | `scrGame` | `game_load_config` | `scrLoadConfig` |
     | `scrGame` | `game_saves` | `scrSaveGame` |
@@ -101,7 +101,7 @@
     | `scrOther` | `draw_text_outline` | `scrDrawTextOutline` |
     | `scrOther` | `make_shapes` | `scrMakeShapes` |
     | `scrOther` | `make_circle` | `scrMakeCircle` |
-* 增加了枚举`MenuMode`, `DeathMusicMode`, `Difficulty`, `CameraMode`，分别代表菜单模式、死亡音乐模式、难度模式、相机模式。它们在脚本`scrInitializing`中。
+* 增加了枚举`MenuMode`, `DeathMusicMode`, `Difficulty`, `CameraMode`，分别代表菜单模式、死亡音乐模式、难度模式、相机模式。它们在脚本`scrInitializing`中。**（枚举`Difficulty`在新版本中已经被删除，用宏代替）**
 * 修改了函数`scrPlayerJump`的函数体，因为板子不再是砖的实例了。现在它分别检查是否与砖和板子碰撞，来决定能否一段跳。
 * 修改了函数`scrPlayerShoot`的参数，因为爬墙处理方式改变了。现在它的参数`mirror`表示是否朝反方向射击。
 * 修改了函数`scrFlipGrav`的函数体。现在它不再执行`scrSetPlayerMask`，`y`坐标的翻转调整值从`4`变成`3`，并且翻转`image_yscale`的值。
@@ -164,3 +164,24 @@
 * 在不影响语义的前提下，修改了某些代码的写法。如使用`array_copy`代替循环语句来复制数组，使用`?:`运算符代替短小的`if..else`语句进行选择等。
 * 在所有绘制事件动作执行后恢复默认绘制参数，即：黑色，完全不透明，文字左、上对齐等。
 * 其他无关紧要的修改。
+## 版本1.0.1
+**此版本可能不稳定**  
+修复了一些bug。
+### 版本特性
+* 修正了无法设置无限跳和调试无限跳的bug。
+* 修正了传送门选择难度无法正常进行使用的bug。
+* 修正了无法正常返回标题界面的bug。
+* 修正了Kid背靠砖时转身卡砖的bug。
+* 修正了子弹碰板子不消失的bug。
+* 实现了蝴蝶结延迟。
+### 修改清单
+* 修改脚本：`scrPlayer`。
+    * 在`player_jump`函数中添加了无限跳和调试无限跳检查部分。
+    * 添加`player_mirror`函数，实现转身。
+* 修改脚本：`scrInitializing`。用宏`MEDIUM`, `HARD`, `VERY_HARD`, `IMPOSSIBLE`代替了枚举`Difficulty`，并在`objSave*`, `objPlayer`, `objWarpStart`各个实例, `objWarpAutosaveNext`, `objDifficultyMenu`中所有使用处做了相应修改。
+* 修改脚本：`scrInitializing`, `scrGame`。前者中的立即执行代码被移动到后者中的`game_init`函数中。
+* 修改物体：`objWorld`。在游戏开始事件添加执行`game_init`函数的代码。
+* 修改物体：`objPlayer`。
+    * 在步事件修改代码，使用函数`player_mirror`而非直接设置`image_xscale`实现转身。
+    * 在绘制事件添加代码，实现蝴蝶结延迟。
+* 修改物体：`objBullet`。增加了和`objPlatform`的碰撞事件，在其中执行摧毁自身的动作。

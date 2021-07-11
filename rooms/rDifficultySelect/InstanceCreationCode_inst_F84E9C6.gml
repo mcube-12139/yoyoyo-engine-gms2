@@ -1,2 +1,2 @@
-dif = Difficulty.IMPOSSIBLE;
+dif = IMPOSSIBLE;
 difName = "Impossible";

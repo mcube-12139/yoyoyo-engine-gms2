@@ -3,7 +3,7 @@ function player_jump() {
         vspeed = -jump;
         doubleJump = true;
         audio_play_sound(sndJump, 0, false);
-    } else if (doubleJump || place_meeting(x, y + global.grav, objWater)) {
+    } else if (doubleJump || place_meeting(x, y + global.grav, objWater) || global.infJump || global.debugInfJump) {
         vspeed = -airJump;
         sprite_index = sprPlayerJump;
         audio_play_sound(sndDoubleJump, 0, false);
@@ -74,6 +74,13 @@ function player_die() {
             room_restart();
         }
     }
+}
+
+function player_mirror() {
+    // mirror player
+    x += image_xscale;
+    xprevious = x;
+    image_xscale = -image_xscale;
 }
 
 function player_flip() {

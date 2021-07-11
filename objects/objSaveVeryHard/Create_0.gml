@@ -1,7 +1,7 @@
 canSave = true;
 grav = 1;
 
-if (global.difficulty > Difficulty.VERY_HARD) {
+if (global.difficulty > VERY_HARD) {
     instance_destroy();
 }
 

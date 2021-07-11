@@ -1,4 +1,4 @@
-if (global.difficulty < Difficulty.IMPOSSIBLE) {
+if (global.difficulty < IMPOSSIBLE) {
     global.autosave = true;
 }
 

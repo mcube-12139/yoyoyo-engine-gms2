@@ -1,2 +1,2 @@
-dif = Difficulty.VERY_HARD;
+dif = VERY_HARD;
 difName = "Very Hard";

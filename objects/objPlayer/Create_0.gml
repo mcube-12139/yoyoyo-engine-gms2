@@ -19,7 +19,7 @@ maxFallSpeed = 9;
 onPlatform = false;
 
 // bow exists?
-bowExists = global.difficulty == Difficulty.MEDIUM && global.gameStarted;
+bowExists = global.difficulty == MEDIUM && global.gameStarted;
 
 if (global.autosave) {
     // automatically save

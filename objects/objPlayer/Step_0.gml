@@ -22,7 +22,9 @@ var onVineRight = place_meeting(x + 1, y, objVineRight) && notOnBlock;
 if (h != 0) {
     // running
     
-    image_xscale = h;
+    if (h != image_xscale) {
+        player_mirror();
+    }
     if ((h == -1 && !onVineRight) || (h == 1 && !onVineLeft)) {
         if (slipBlock == noone) {
             // not meet slip block

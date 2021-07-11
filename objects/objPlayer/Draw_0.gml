@@ -1,11 +1,16 @@
-var drawX = x;
-var drawY = y;
-
 draw_self();
 if (bowExists) {
-    // todo: delay bow
+    var bowX;
+    var bowY;
+    if (global.delayBow) {
+        bowX = xprevious;
+        bowY = yprevious;
+    } else {
+        bowX = x;
+        bowY = y;
+    }
     // draw bow
-    draw_sprite_ext(sprBow, 0, drawX, drawY, image_xscale, image_yscale, image_angle, image_blend, image_alpha);
+    draw_sprite_ext(sprBow, 0, bowX, bowY, image_xscale, image_yscale, image_angle, image_blend, image_alpha);
 }
 
 if (global.debugShowHitbox) {
