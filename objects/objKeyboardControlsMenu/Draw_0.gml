@@ -1,4 +1,4 @@
-draw_set_font(fArialBold_24);
+draw_set_font(global.texts.largeFont);
 
 for (var i = 0; i != 11; ++i) {
     var drawX = xSelector + xSeperation;
@@ -12,7 +12,7 @@ for (var i = 0; i != 11; ++i) {
         draw_sprite(sprPlayerIdle, playerIndex, xSelector - 20, drawY + 52);
         
         if (settingKey) {
-            draw_text(drawX, drawY + 32, "Press the key to set");
+            draw_text(drawX, drawY + 32, global.texts.pressToSet);
         }
     }
     
@@ -21,7 +21,7 @@ for (var i = 0; i != 11; ++i) {
     }
     
     if (resetPrompt && i == 10) {
-        draw_text(drawX, drawY + 32, "Controls reset!");
+        draw_text(drawX, drawY + 32, global.texts.controlsReset + "!");
     }
     
     draw_set_halign(fa_left);

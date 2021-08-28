@@ -17,15 +17,15 @@ function draw_button_info(optionsText) {
     }
     
     // draw texts
-    draw_set_font(fArialBold_12);
-    draw_text(34, 556, "[" + backButton + "] Back");
+    draw_set_font(global.texts.smallFont);
+    draw_text(34, 556, "<" + backButton + "> " + global.texts.back);
     draw_set_halign(fa_right);
-    draw_text(766, 556, "[" + acceptButton + "] Accept");
+    draw_text(766, 556, "<" + acceptButton + "> " + global.texts.accept);
     
     if (optionsText) {
         // draw option text
         draw_set_halign(fa_middle);
-        draw_text(400, 556, "[" + optionsButton + "] Options");
+        draw_text(400, 556, "<" + optionsButton + "> " + global.texts.options);
     }
     
     draw_set_halign(fa_left);
@@ -131,6 +131,8 @@ function room_get_property() {
     
     var roomSong = -1;
     var cameraMode = CameraMode.NONE;
+    var autotileMode = AutotileMode.NONE;
+    var blockSprite = sprBlock;
     
     switch (room) {
     case rTitle:
@@ -142,6 +144,8 @@ function room_get_property() {
     case rStage_01:
         roomSong = sndGuyRockBGM;
         cameraMode = CameraMode.SNAPPED;
+        autotileMode = AutotileMode._47;
+        blockSprite = sprBlockSkin_3;
         break;
     case rStage_02:
         roomSong = sndGuyRockBGM;
@@ -157,7 +161,14 @@ function room_get_property() {
 
     global.roomMusic = roomSong;
     global.roomCameraMode = cameraMode;
+    global.autotileMode = autotileMode;
     if (roomSong != -2) {
         music_play(roomSong, true);
+    }
+    
+    with (all) {
+        if (object_index == objAutotiledBlock || object_index == objAutotiledFakeBlock || object_index == objAutotiledHiddenBlock) {
+            sprite_index = blockSprite;
+        }
     }
 }

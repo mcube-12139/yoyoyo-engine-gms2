@@ -8,18 +8,18 @@ settingButton = false;
 resetPrompt = false;
 
 strSelect = [
-    "Controller Index",
-    "Left Button",
-    "Right Button",
-    "Up Button",
-    "Down Button",
-    "Jump Button",
-    "Shoot Button",
-    "Restart Button",
-    "Skip Button",
-    "Suicide Button",
-    "Pause Button",
-    "Reset Controls"
+    global.texts.controllerIndex,
+    global.texts.leftButton,
+    global.texts.rightButton,
+    global.texts.upButton,
+    global.texts.downButton,
+    global.texts.jumpButton,
+    global.texts.shootButton,
+    global.texts.restartButton,
+    global.texts.skipButton,
+    global.texts.suicideButton,
+    global.texts.pauseButton,
+    global.texts.resetControls
 ];
 
 strButton = [

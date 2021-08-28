@@ -1,5 +1,118 @@
 function game_init() {
     // initialize the game
+    // set texts
+    global.textsEN = {
+        gameOverSprite: sprGameOver,
+        gameName: "YoYoYo Engine GMS2",
+        smallFont: fZKKLT_12,
+        back: "Back",
+        accept: "Accept",
+        options: "Options",
+        currentController: "Current controller",
+        none: "None",
+        loadGame: "Load Game",
+        medium: "Medium",
+        hard: "Hard",
+        veryHard: "Very Hard",
+        impossible: "Impossible",
+        overwriteWarning: "Are you sure\nyou want to\noverwrite this save?",
+        yes: "Yes",
+        no: "No",
+        noData: "No Data",
+        middleFont: fZKKLT_18,
+        volume: "Volume",
+        deaths: "Deaths",
+        time: "Time",
+        largeFont: fZKKLT_24,
+        clear: "Clear",
+        pressToSet: "Press the key to set",
+        controlsReset: "Controls reset",
+        leftButton: "Left Button",
+        rightButton: "Right Button",
+        upButton: "Up Button",
+        downButton: "Down Button",
+        jumpButton: "Jump Button",
+        shootButton: "Shoot Button",
+        restartButton: "Restart Button",
+        skipButton: "Skip Button",
+        suicideButton: "Suicide Button",
+        pauseButton: "Pause Button",
+        resetControls: "Reset Controls",
+        pressButtonToSet: "Press button to set",
+        controllerIndex: "Controller Index",
+        disabled: "Disabled",
+        extraLargeFont: fZKKLT_30,
+        music: "Music",
+        volumeLevel: "Volume Level",
+        screenMode: "Screen Mode",
+        smoothingMode: "Smoothing Mode",
+        vsync: "Vsync",
+        setKeyboardControls: "Set Keyboard Controls",
+        controllerOptions: "Controller Options",
+        off: "Off",
+        on: "On",
+        fullscreen: "Fullscreen",
+        windowed: "Windowed",
+        pause: "PAUSE",
+        save: "Save"
+    };
+    global.textsCN = {
+        gameOverSprite: sprGameOverCN,
+        gameName: "YoYoYo 引擎 GMS2",
+        smallFont: fZKKLT_12,
+        back: "返回",
+        accept: "确定",
+        options: "设置",
+        currentController: "当前控制器",
+        none: "无",
+        loadGame: "读取存档",
+        medium: "一般",
+        hard: "困难",
+        veryHard: "非常困难",
+        impossible: "不可能",
+        overwriteWarning: "你确定要覆盖\n这个存档吗?",
+        yes: "是",
+        no: "否",
+        noData: "无存档",
+        middleFont: fZKKLT_18,
+        volume: "音量",
+        deaths: "死亡",
+        time: "时间",
+        largeFont: fZKKLT_24,
+        clear: "通关",
+        pressToSet: "按下要设置的按键",
+        controlsReset: "键位重置了",
+        leftButton: "左键",
+        rightButton: "右键",
+        upButton: "上键",
+        downButton: "下键",
+        jumpButton: "跳跃键",
+        shootButton: "射击键",
+        restartButton: "重试键",
+        skipButton: "跳过键",
+        suicideButton: "自杀键",
+        pauseButton: "暂停键",
+        resetControls: "重置键位",
+        pressButtonToSet: "按下要设置的按钮",
+        controllerIndex: "控制器号码",
+        disabled: "禁用",
+        extraLargeFont: fZKKLT_30,
+        music: "音乐",
+        volumeLevel: "音量",
+        screenMode: "屏幕模式",
+        smoothingMode: "平滑模式",
+        vsync: "垂直同步",
+        setKeyboardControls: "设置键位",
+        controllerOptions: "设置控制器",
+        off: "关",
+        on: "开",
+        fullscreen: "全屏",
+        windowed: "窗口化",
+        pause: "暂停",
+        save: "存档"
+    };
+    global.texts = global.textsCN;
+    
     // set global option
 
     // debug mode?
@@ -16,9 +129,8 @@ function game_init() {
     global.debugShowHitbox = false;
 
     // default window caption
-    global.windowCaptionDef = "YoYoYo Engine GMS2";
-    global.windowCaptionLast = global.windowCaptionDef;
-    window_set_caption(global.windowCaptionDef);
+    global.windowCaptionLast = global.texts.gameName;
+    window_set_caption(global.windowCaptionLast);
 
     // MD5 data password
     global.md5StrAdd = "Put something here";
@@ -142,6 +254,316 @@ function game_init() {
     global.controllerMode = false;
     // controller delay
     global.controllerDelay = -1;
+
+    // last autotiled room
+    global.autotileLastRoom = -1;
+    global.autotileMode = AutotileMode.NONE;
+    global.autotileMap = ds_map_create();
+    
+    global.autotile4dIndices[46] = 3;
+    global.autotile4dIndices[0] = 0;
+    global.autotile4dIndices[1] = 3;
+    global.autotile4dIndices[2] = 3;
+    global.autotile4dIndices[3] = 3;
+    global.autotile4dIndices[4] = 3;
+    global.autotile4dIndices[5] = 3;
+    global.autotile4dIndices[6] = 3;
+    global.autotile4dIndices[7] = 3;
+    global.autotile4dIndices[8] = 3;
+    global.autotile4dIndices[9] = 3;
+    global.autotile4dIndices[10] = 3;
+    global.autotile4dIndices[11] = 3;
+    global.autotile4dIndices[12] = 3;
+    global.autotile4dIndices[13] = 3;
+    global.autotile4dIndices[14] = 3;
+    global.autotile4dIndices[15] = 3;
+    global.autotile4dIndices[16] = 2;
+    global.autotile4dIndices[17] = 3;
+    global.autotile4dIndices[18] = 3;
+    global.autotile4dIndices[19] = 3;
+    global.autotile4dIndices[20] = 1;
+    global.autotile4dIndices[21] = 3;
+    global.autotile4dIndices[22] = 3;
+    global.autotile4dIndices[23] = 3;
+    global.autotile4dIndices[24] = 2;
+    global.autotile4dIndices[25] = 3;
+    global.autotile4dIndices[26] = 3;
+    global.autotile4dIndices[27] = 3;
+    global.autotile4dIndices[28] = 1;
+    global.autotile4dIndices[29] = 3;
+    global.autotile4dIndices[30] = 3;
+    global.autotile4dIndices[31] = 3;
+    global.autotile4dIndices[32] = 2;
+    global.autotile4dIndices[33] = 1;
+    global.autotile4dIndices[34] = 3;
+    global.autotile4dIndices[35] = 3;
+    global.autotile4dIndices[36] = 3;
+    global.autotile4dIndices[37] = 3;
+    global.autotile4dIndices[38] = 3;
+    global.autotile4dIndices[39] = 3;
+    global.autotile4dIndices[40] = 3;
+    global.autotile4dIndices[41] = 3;
+    global.autotile4dIndices[42] = 3;
+    global.autotile4dIndices[43] = 3;
+    global.autotile4dIndices[44] = 3;
+    global.autotile4dIndices[45] = 3;
+
+    global.autotileIndices[255] = 0;
+    global.autotileIndices[0] = 46;
+    global.autotileIndices[1] = 46;
+    global.autotileIndices[2] = 45;
+    global.autotileIndices[3] = 45;
+    global.autotileIndices[4] = 46;
+    global.autotileIndices[5] = 46;
+    global.autotileIndices[6] = 45;
+    global.autotileIndices[7] = 45;
+    global.autotileIndices[8] = 42;
+    global.autotileIndices[9] = 42;
+    global.autotileIndices[10] = 37;
+    global.autotileIndices[11] = 37;
+    global.autotileIndices[12] = 42;
+    global.autotileIndices[13] = 42;
+    global.autotileIndices[14] = 36;
+    global.autotileIndices[15] = 36;
+    global.autotileIndices[16] = 46;
+    global.autotileIndices[17] = 46;
+    global.autotileIndices[18] = 45;
+    global.autotileIndices[19] = 45;
+    global.autotileIndices[20] = 46;
+    global.autotileIndices[21] = 46;
+    global.autotileIndices[22] = 45;
+    global.autotileIndices[23] = 45;
+    global.autotileIndices[24] = 42;
+    global.autotileIndices[25] = 42;
+    global.autotileIndices[26] = 37;
+    global.autotileIndices[27] = 37;
+    global.autotileIndices[28] = 42;
+    global.autotileIndices[29] = 42;
+    global.autotileIndices[30] = 36;
+    global.autotileIndices[31] = 36;
+    global.autotileIndices[32] = 43;
+    global.autotileIndices[33] = 43;
+    global.autotileIndices[34] = 33;
+    global.autotileIndices[35] = 33;
+    global.autotileIndices[36] = 43;
+    global.autotileIndices[37] = 43;
+    global.autotileIndices[38] = 33;
+    global.autotileIndices[39] = 33;
+    global.autotileIndices[40] = 35;
+    global.autotileIndices[41] = 35;
+    global.autotileIndices[42] = 23;
+    global.autotileIndices[43] = 23;
+    global.autotileIndices[44] = 35;
+    global.autotileIndices[45] = 35;
+    global.autotileIndices[46] = 21;
+    global.autotileIndices[47] = 21;
+    global.autotileIndices[48] = 43;
+    global.autotileIndices[49] = 43;
+    global.autotileIndices[50] = 33;
+    global.autotileIndices[51] = 33;
+    global.autotileIndices[52] = 43;
+    global.autotileIndices[53] = 43;
+    global.autotileIndices[54] = 33;
+    global.autotileIndices[55] = 33;
+    global.autotileIndices[56] = 34;
+    global.autotileIndices[57] = 34;
+    global.autotileIndices[58] = 22;
+    global.autotileIndices[59] = 22;
+    global.autotileIndices[60] = 34;
+    global.autotileIndices[61] = 34;
+    global.autotileIndices[62] = 20;
+    global.autotileIndices[63] = 20;
+    global.autotileIndices[64] = 46;
+    global.autotileIndices[65] = 46;
+    global.autotileIndices[66] = 45;
+    global.autotileIndices[67] = 45;
+    global.autotileIndices[68] = 46;
+    global.autotileIndices[69] = 46;
+    global.autotileIndices[70] = 45;
+    global.autotileIndices[71] = 45;
+    global.autotileIndices[72] = 42;
+    global.autotileIndices[73] = 42;
+    global.autotileIndices[74] = 37;
+    global.autotileIndices[75] = 37;
+    global.autotileIndices[76] = 42;
+    global.autotileIndices[77] = 42;
+    global.autotileIndices[78] = 36;
+    global.autotileIndices[79] = 36;
+    global.autotileIndices[80] = 46;
+    global.autotileIndices[81] = 46;
+    global.autotileIndices[82] = 45;
+    global.autotileIndices[83] = 45;
+    global.autotileIndices[84] = 46;
+    global.autotileIndices[85] = 46;
+    global.autotileIndices[86] = 45;
+    global.autotileIndices[87] = 45;
+    global.autotileIndices[88] = 42;
+    global.autotileIndices[89] = 42;
+    global.autotileIndices[90] = 37;
+    global.autotileIndices[91] = 37;
+    global.autotileIndices[92] = 42;
+    global.autotileIndices[93] = 42;
+    global.autotileIndices[94] = 36;
+    global.autotileIndices[95] = 36;
+    global.autotileIndices[96] = 43;
+    global.autotileIndices[97] = 43;
+    global.autotileIndices[98] = 33;
+    global.autotileIndices[99] = 33;
+    global.autotileIndices[100] = 43;
+    global.autotileIndices[101] = 43;
+    global.autotileIndices[102] = 33;
+    global.autotileIndices[103] = 33;
+    global.autotileIndices[104] = 35;
+    global.autotileIndices[105] = 35;
+    global.autotileIndices[106] = 23;
+    global.autotileIndices[107] = 23;
+    global.autotileIndices[108] = 35;
+    global.autotileIndices[109] = 35;
+    global.autotileIndices[110] = 21;
+    global.autotileIndices[111] = 21;
+    global.autotileIndices[112] = 43;
+    global.autotileIndices[113] = 43;
+    global.autotileIndices[114] = 33;
+    global.autotileIndices[115] = 33;
+    global.autotileIndices[116] = 43;
+    global.autotileIndices[117] = 43;
+    global.autotileIndices[118] = 33;
+    global.autotileIndices[119] = 33;
+    global.autotileIndices[120] = 34;
+    global.autotileIndices[121] = 34;
+    global.autotileIndices[122] = 22;
+    global.autotileIndices[123] = 22;
+    global.autotileIndices[124] = 34;
+    global.autotileIndices[125] = 34;
+    global.autotileIndices[126] = 20;
+    global.autotileIndices[127] = 20;
+    global.autotileIndices[128] = 44;
+    global.autotileIndices[129] = 44;
+    global.autotileIndices[130] = 39;
+    global.autotileIndices[131] = 38;
+    global.autotileIndices[132] = 44;
+    global.autotileIndices[133] = 44;
+    global.autotileIndices[134] = 39;
+    global.autotileIndices[135] = 38;
+    global.autotileIndices[136] = 32;
+    global.autotileIndices[137] = 32;
+    global.autotileIndices[138] = 27;
+    global.autotileIndices[139] = 25;
+    global.autotileIndices[140] = 32;
+    global.autotileIndices[141] = 32;
+    global.autotileIndices[142] = 26;
+    global.autotileIndices[143] = 24;
+    global.autotileIndices[144] = 44;
+    global.autotileIndices[145] = 44;
+    global.autotileIndices[146] = 39;
+    global.autotileIndices[147] = 38;
+    global.autotileIndices[148] = 44;
+    global.autotileIndices[149] = 44;
+    global.autotileIndices[150] = 39;
+    global.autotileIndices[151] = 38;
+    global.autotileIndices[152] = 32;
+    global.autotileIndices[153] = 32;
+    global.autotileIndices[154] = 27;
+    global.autotileIndices[155] = 25;
+    global.autotileIndices[156] = 32;
+    global.autotileIndices[157] = 32;
+    global.autotileIndices[158] = 26;
+    global.autotileIndices[159] = 24;
+    global.autotileIndices[160] = 41;
+    global.autotileIndices[161] = 41;
+    global.autotileIndices[162] = 31;
+    global.autotileIndices[163] = 30;
+    global.autotileIndices[164] = 41;
+    global.autotileIndices[165] = 41;
+    global.autotileIndices[166] = 31;
+    global.autotileIndices[167] = 30;
+    global.autotileIndices[168] = 19;
+    global.autotileIndices[169] = 19;
+    global.autotileIndices[170] = 15;
+    global.autotileIndices[171] = 14;
+    global.autotileIndices[172] = 19;
+    global.autotileIndices[173] = 19;
+    global.autotileIndices[174] = 7;
+    global.autotileIndices[175] = 6;
+    global.autotileIndices[176] = 41;
+    global.autotileIndices[177] = 41;
+    global.autotileIndices[178] = 31;
+    global.autotileIndices[179] = 30;
+    global.autotileIndices[180] = 41;
+    global.autotileIndices[181] = 41;
+    global.autotileIndices[182] = 31;
+    global.autotileIndices[183] = 30;
+    global.autotileIndices[184] = 17;
+    global.autotileIndices[185] = 17;
+    global.autotileIndices[186] = 11;
+    global.autotileIndices[187] = 10;
+    global.autotileIndices[188] = 17;
+    global.autotileIndices[189] = 17;
+    global.autotileIndices[190] = 3;
+    global.autotileIndices[191] = 2;
+    global.autotileIndices[192] = 44;
+    global.autotileIndices[193] = 44;
+    global.autotileIndices[194] = 39;
+    global.autotileIndices[195] = 38;
+    global.autotileIndices[196] = 44;
+    global.autotileIndices[197] = 44;
+    global.autotileIndices[198] = 39;
+    global.autotileIndices[199] = 38;
+    global.autotileIndices[200] = 32;
+    global.autotileIndices[201] = 32;
+    global.autotileIndices[202] = 27;
+    global.autotileIndices[203] = 25;
+    global.autotileIndices[204] = 32;
+    global.autotileIndices[205] = 32;
+    global.autotileIndices[206] = 26;
+    global.autotileIndices[207] = 24;
+    global.autotileIndices[208] = 44;
+    global.autotileIndices[209] = 44;
+    global.autotileIndices[210] = 39;
+    global.autotileIndices[211] = 38;
+    global.autotileIndices[212] = 44;
+    global.autotileIndices[213] = 44;
+    global.autotileIndices[214] = 39;
+    global.autotileIndices[215] = 38;
+    global.autotileIndices[216] = 32;
+    global.autotileIndices[217] = 32;
+    global.autotileIndices[218] = 27;
+    global.autotileIndices[219] = 25;
+    global.autotileIndices[220] = 32;
+    global.autotileIndices[221] = 32;
+    global.autotileIndices[222] = 26;
+    global.autotileIndices[223] = 24;
+    global.autotileIndices[224] = 40;
+    global.autotileIndices[225] = 40;
+    global.autotileIndices[226] = 29;
+    global.autotileIndices[227] = 28;
+    global.autotileIndices[228] = 40;
+    global.autotileIndices[229] = 40;
+    global.autotileIndices[230] = 29;
+    global.autotileIndices[231] = 28;
+    global.autotileIndices[232] = 18;
+    global.autotileIndices[233] = 18;
+    global.autotileIndices[234] = 13;
+    global.autotileIndices[235] = 12;
+    global.autotileIndices[236] = 18;
+    global.autotileIndices[237] = 18;
+    global.autotileIndices[238] = 5;
+    global.autotileIndices[239] = 4;
+    global.autotileIndices[240] = 40;
+    global.autotileIndices[241] = 40;
+    global.autotileIndices[242] = 29;
+    global.autotileIndices[243] = 28;
+    global.autotileIndices[244] = 40;
+    global.autotileIndices[245] = 40;
+    global.autotileIndices[246] = 29;
+    global.autotileIndices[247] = 28;
+    global.autotileIndices[248] = 16;
+    global.autotileIndices[249] = 16;
+    global.autotileIndices[250] = 9;
+    global.autotileIndices[251] = 8;
+    global.autotileIndices[252] = 16;
+    global.autotileIndices[253] = 16;
+    global.autotileIndices[254] = 1;
 
     // set random seed
     randomize();
@@ -397,10 +819,10 @@ function game_restarts() {
 }
 
 function game_set_caption() {
-    var caption = global.windowCaptionDef;
+    var caption = global.texts.gameName;
     
     if (global.gameStarted) {
-        caption += " -" + " Deaths: " + string(global.death) + " Time: ";
+        caption += " - " + global.texts.deaths + ": " + string(global.death) + " " + global.texts.time + ": ";
         
         var t = floor(global.time);
         caption += time_stringify(t);

@@ -13,6 +13,14 @@ enum DeathMusicMode {
     FADE
 }
 
+// autotile mode
+enum AutotileMode {
+    NONE,
+    _2,
+    _4,
+    _47
+}
+
 // difficulties
 // Cannot be replaced by a enumeration, because enumeration values are integers so a bug will occur when they are saved and loaded.
 #macro MEDIUM 0

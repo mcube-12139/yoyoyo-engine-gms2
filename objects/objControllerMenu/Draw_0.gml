@@ -1,4 +1,4 @@
-draw_set_font(fArialBold_24);
+draw_set_font(global.texts.largeFont);
 
 for (var i = 0; i != 12; ++i) {
     var drawX = xSelector + xSeperation;
@@ -12,7 +12,7 @@ for (var i = 0; i != 12; ++i) {
         draw_sprite(sprPlayerIdle, playerIndex, xSelector - 20, drawY + 52);
         
         if (settingButton) {
-            draw_text(drawX, drawY + 32, "Press button to set");
+            draw_text(drawX, drawY + 32, global.texts.pressButtonToSet);
         }
     }
     
@@ -21,7 +21,7 @@ for (var i = 0; i != 12; ++i) {
     }
     
     if (resetPrompt && i == 11) {
-        draw_text(drawX, drawY + 32, "Controls reset!");
+        draw_text(drawX, drawY + 32, global.texts.controlsReset);
     }
     
     draw_set_halign(fa_left);
@@ -29,14 +29,14 @@ for (var i = 0; i != 12; ++i) {
 
 if (global.controllerIndex != -1) {
     draw_set_color(c_maroon);
-    draw_set_font(fArialBold_12);
+    draw_set_font(global.texts.smallFont);
     
-    var controllerText = "Current controller: ";
+    var controllerText = global.texts.currentController + ": ";
     
     if (gamepad_is_connected(global.controllerIndex)) {
         controllerText += gamepad_get_description(global.controllerIndex);
     } else {
-        controllerText += "None";
+        controllerText += global.texts.none;
     }
     
     draw_text(xSelector + 2, ySelector + 12 * ySeperation + 34, controllerText);

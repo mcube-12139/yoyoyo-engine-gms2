@@ -1,33 +1,33 @@
 for (var i = 0; i != 3; ++i) {
     var drawX = x + i * xSeperation;
     
-    draw_set_font(fArialBold_30);
+    draw_set_font(global.texts.extraLargeFont);
     
     draw_text(drawX, y, str[i]);
     
-    draw_set_font(fArialBold_12);
+    draw_set_font(global.texts.smallFont);
     draw_set_halign(fa_center);
     
     var difStr;
     if (difSelect && i == select) {
         if (!warnText) {
             if (select_2 == -1) {
-                difStr = "< Load Game >";
+                difStr = "< " + global.texts.loadGame + " >";
             } else if (select_2 == MEDIUM) {
-                difStr = "< Medium >";
+                difStr = "< " + global.texts.medium + " >";
             } else if (select_2 == HARD) {
-                difStr = "< Hard >";
+                difStr = "< " + global.texts.hard + " >";
             } else if (select_2 == VERY_HARD) {
-                difStr = "< Very Hard >";
+                difStr = "< " + global.texts.veryHard + " >";
             } else {
-                difStr = "< Impossible >";
+                difStr = "< " + global.texts.impossible + " >";
             }
         } else {
-            draw_text(drawX + 63, y - 100, "Are you sure\nyou want to\noverwrite this save?");
+            draw_text(drawX + 63, y - 100, global.texts.overwriteWarning);
             if (warnSelect) {
-                difStr = "< Yes >";
+                difStr = "< " + global.texts.yes + " >";
             } else {
-                difStr = "< No >";
+                difStr = "< " + global.texts.no + " >";
             }
         }
     }
@@ -41,20 +41,20 @@ for (var i = 0; i != 3; ++i) {
         
         if (!difSelect || (difSelect && i != select)) {
             if (difficulty[i] == MEDIUM) {
-                difStr = "Medium";
+                difStr = global.texts.medium;
             } else if (difficulty[i] == HARD) {
-                difStr = "Hard";
+                difStr = global.texts.hard;
             } else if (difficulty[i] == VERY_HARD) {
-                difStr = "Very Hard";
+                difStr = global.texts.veryHard;
             } else {
-                difStr = "Impossible";
+                difStr = global.texts.impossible;
             }
         }
         
-        draw_set_font(fArialBold_24);
+        draw_set_font(global.texts.largeFont);
         
         if (clear[i]) {
-            draw_text(drawX + 63, y + 215, "Clear!!");
+            draw_text(drawX + 63, y + 215, global.texts.clear + "!!");
         }
         var l = 0;
         for (var j = 0; j != 2; ++j) {
@@ -67,11 +67,11 @@ for (var i = 0; i != 3; ++i) {
         }
     } else {
         if (!difSelect || (difSelect && i != select)) {
-            difStr = "No Data";
+            difStr = global.texts.noData;
         }
     }
     
-    draw_set_font(fArialBold_12);
+    draw_set_font(global.texts.smallFont);
     draw_text(drawX + 65, y + 49, difStr);
     
     if (i == select) {

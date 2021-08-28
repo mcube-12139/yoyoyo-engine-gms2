@@ -2,7 +2,7 @@
 
 // draw debug overlay
 if (global.debugOverlay) {
-    draw_set_font(fArialBold_12);
+    draw_set_font(global.texts.smallFont);
     
     var drawX = 0;
     var drawY = 0;
@@ -41,25 +41,26 @@ if (global.gamePaused) {
     draw_set_color(c_white);
     
     draw_set_halign(fa_center);
-    draw_set_font(fArialBold_30);
+    draw_set_font(global.texts.extraLargeFont);
     
-    draw_text(guiWidth / 2, guiHeight / 2 - 24, "PAUSE");
+    draw_text(guiWidth / 2, guiHeight / 2 - 24, global.texts.pause);
     
     draw_set_halign(fa_left);
-    draw_set_font(fArialBold_18);
+    draw_set_font(global.texts.middleFont);
     
     var t = global.time;
     var timeText = time_stringify(t);
     
-    draw_text(20, 516, "Volume: " + string(global.volumeLevel) + "%");
-    draw_text(20, 541, "Deaths: " + string(global.death));
-    draw_text(20, 566, "Time:" + string(timeText));
+    draw_text(20, 516, global.texts.volume + ": " + string(global.volumeLevel) + "%");
+    draw_text(20, 541, global.texts.deaths + ": " + string(global.death));
+    draw_text(20, 566, global.texts.time + ": " + string(timeText));
 }
 
 // draw "Debug Mode" on title screen
 if (global.debugMode && room == rTitle) {
     draw_set_color(c_red);
-    draw_set_font(fArialBold_12);
+    draw_set_font(global.texts.smallFont);
     draw_text(34, 34, "Debug Mode");
-    draw_set_color(c_black);
 }
+
+draw_set_color(c_black);

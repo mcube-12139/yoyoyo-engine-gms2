@@ -13,13 +13,13 @@ if (!global.controllerEnabled) {
 }
 
 strSelect = [
-    "Music",
-    "Volume Level",
-    "Screen Mode",
-    "Smoothing Mode",
-    "Vsync",
-    "Set Keyboard Controls",
-    "Controller Options"
+    global.texts.music,
+    global.texts.volumeLevel,
+    global.texts.screenMode,
+    global.texts.smoothingMode,
+    global.texts.vsync,
+    global.texts.setKeyboardControls,
+    global.texts.controllerOptions
 ];
 
 playerIndex = 0;

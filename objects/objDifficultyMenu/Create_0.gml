@@ -4,9 +4,9 @@ difSelect = false;
 select = global.menuSelectPrev[0];
 select_2 = 0;
 xSeperation = 239;
-str[0] = "Save 1";
-str[1] = "Save 2";
-str[2] = "Save 3";
+str[0] = global.texts.save + " 1";
+str[1] = global.texts.save + " 2";
+str[2] = global.texts.save + " 3";
 warnText = false;
 warnSelect = true;
 

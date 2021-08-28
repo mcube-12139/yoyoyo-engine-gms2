@@ -13,3 +13,4 @@ if (global.roomCameraMode == CameraMode.SNAPPED) {
     var viewHeight = camera_get_view_height(view_camera[0]);
     camera_set_view_pos(view_camera[0], median(0, global.roomCameraX - viewWidth / 2, room_width - viewWidth), median(0, global.roomCameraY - viewHeight / 2, room_height - viewHeight));
 }
+autotile_update();

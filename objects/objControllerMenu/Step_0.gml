@@ -52,14 +52,14 @@ if (!settingButton) {
             if (global.controllerIndex != -1) {
                 strButton[0] = string(global.controllerIndex);
             } else {
-                strButton[0] = "Disabled";
+                strButton[0] = global.texts.disabled;
             }
         } else if (control_check_pressed(global.menuLeftButton)) {
             global.controllerIndex = (global.controllerIndex + 13) % 13 - 1;
             if (global.controllerIndex != -1) {
                 strButton[0] = string(global.controllerIndex);
             } else {
-                strButton[0] = "Disabled";
+                strButton[0] = global.texts.disabled;
             }
         }
     }
